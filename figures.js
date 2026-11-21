@@ -1,3 +1,4 @@
+
 /* ====== TES FIGURES, TES NIVEAUX ET TES COMBOS ======
    Ajouter une figure : écris son nom entre guillemets dans la liste du niveau, suivi d’une virgule.
    Ajouter un niveau : copie un bloc entre accolades { ... }, change id (unique, sans accent), court, nom et la liste.
@@ -25,7 +26,7 @@ const NIVEAUX=[
 {
   id:"n4", court:"Niveau 4", nom:"Niveau 4 · Intermédiaire",
   figures:[
-    "Jade", "Cupid", "Iguana", "Butterfly extended", "Brass monkey", "Basic flag", "Viva split", "Viva prise coude", "Teddy", "Sleeping flamingo", "Flying flamingo", "Inverted flamingo", "Queen", "Triangle knot", "Helix", "Tulipe", "Vortex", "Baby Valentine", "Artemis", "Flatline", "Pencil spin", "Viva extended", "Dragonfly ciseau", "Caterpillar", "Archer"
+    "Jade", "Cupid", "Iguana", "Butterfly extended", "Brass monkey", "Basic flag", "Viva split", "Viva prise coude", "Teddy", "Sleeping flamingo", "Flying flamingo", "Inverted flamingo", "Queen", "Triangle knot", "Helix", "Tulipe", "Vortex", "Baby Valentine", "Artemis", "Flatline", "Pencil spin", "Fish", "Dragonfly ciseau", "Caterpillar", "Archer"
   ]
 }
 ];
