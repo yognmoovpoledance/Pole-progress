@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Une personne est autorisée si : elle est connectée, son e-mail est vérifié,
+    // et son e-mail figure dans la collection "acces" avec actif = true.
+    function acheteuse() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && get(/databases/$(database)/documents/acces/$(request.auth.token.email.lower())).data.actif == true;
+    }
+
+    // Chaque élève ne lit et n'écrit que son propre carnet.
+    match /utilisateurs/{uid} {
+      allow read, write: if acheteuse() && request.auth.uid == uid;
+    }
+
+    // La liste des acheteuses n'est modifiable que depuis la console Firebase (par toi).
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
