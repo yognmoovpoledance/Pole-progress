@@ -1,3 +1,4 @@
+
 import { firebaseConfig } from "./firebase-config.js";
 const G = "https://www.gstatic.com/firebasejs/10.12.2/";
 const $ = id => document.getElementById(id);
@@ -53,6 +54,7 @@ if (!firebaseConfig || !firebaseConfig.apiKey || String(firebaseConfig.apiKey).s
   async function entrer(user) {
     uid = user.uid;
     try {
+      try { await user.getIdToken(true); } catch (e) {}
       const s = await F.getDoc(ref());
       const data = s.exists() ? s.data() : {};
       if (!data.accord || data.accord.version !== CGV_VERSION) {
@@ -61,7 +63,7 @@ if (!firebaseConfig || !firebaseConfig.apiKey || String(firebaseConfig.apiKey).s
       ouvrir(data, s.exists());
     } catch (e) {
       uid = null;
-      if (e && e.code === "permission-denied") show("a-refus");
+      if (e && e.code === "permission-denied") { show("a-refus"); msg("Adresse utilisée : " + (user.email || "")); }
       else { $("a-errtxt").textContent = "Connexion impossible pour le moment. Vérifie ta connexion internet."; show("a-err"); }
     }
   }
