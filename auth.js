@@ -63,7 +63,11 @@ if (!firebaseConfig || !firebaseConfig.apiKey || String(firebaseConfig.apiKey).s
       ouvrir(data, s.exists());
     } catch (e) {
       uid = null;
-      if (e && e.code === "permission-denied") { show("a-refus"); msg("Adresse utilisée : " + (user.email || "")); }
+      if (e && e.code === "permission-denied") {
+        show("a-refus");
+        let c = null; try { c = (await user.getIdTokenResult()).claims; } catch (e2) {}
+        msg("Diagnostic (auth v3) — Adresse : " + (user.email || "") + " · e-mail vérifié : " + (user.emailVerified ? "oui" : "non") + " · session : " + (c && c.email_verified ? "vérifiée" : "non vérifiée") + " · document attendu : acces/" + String(user.email || "").toLowerCase());
+      }
       else { $("a-errtxt").textContent = "Connexion impossible pour le moment. Vérifie ta connexion internet."; show("a-err"); }
     }
   }
